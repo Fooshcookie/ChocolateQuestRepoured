@@ -5,18 +5,19 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
+import software.bernie.geckolib3.core.IAnimatable;
 import team.cqr.cqrepoured.client.models.entities.ModelCQRBiped;
 import team.cqr.cqrepoured.client.render.entity.RenderCQREntity;
 import team.cqr.cqrepoured.objects.entity.bases.AbstractEntityCQR;
 
-public class LayerCQREntityCape extends AbstractLayerCQR {
+public class LayerCQREntityCape<T extends AbstractEntityCQR & IAnimatable> extends AbstractLayerCQR<T> {
 
 	public LayerCQREntityCape(RenderCQREntity<?> renderCQREntity) {
 		super(renderCQREntity);
 	}
 
 	@Override
-	public void doRenderLayer(AbstractEntityCQR entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void render(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!(this.entityRenderer.getMainModel() instanceof ModelCQRBiped)) {
 			return;
 		}

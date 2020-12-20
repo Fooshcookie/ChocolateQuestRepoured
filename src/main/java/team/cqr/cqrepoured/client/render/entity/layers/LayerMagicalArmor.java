@@ -5,10 +5,11 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import software.bernie.geckolib3.core.IAnimatable;
 import team.cqr.cqrepoured.client.render.entity.RenderCQREntity;
 import team.cqr.cqrepoured.objects.entity.bases.AbstractEntityCQR;
 
-public class LayerMagicalArmor extends AbstractLayerCQR {
+public class LayerMagicalArmor<T extends AbstractEntityCQR & IAnimatable> extends AbstractLayerCQR<T> {
 
 	protected final ResourceLocation ARMOR_TEXTURE;
 	protected final RenderCQREntity<? extends AbstractEntityCQR> RENDERER;
@@ -22,7 +23,7 @@ public class LayerMagicalArmor extends AbstractLayerCQR {
 	}
 
 	@Override
-	public void doRenderLayer(AbstractEntityCQR entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public void doRenderLayer(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 
 		if (entitylivingbaseIn.isMagicArmorActive()) {
 			GlStateManager.depthMask(!entitylivingbaseIn.isInvisible());

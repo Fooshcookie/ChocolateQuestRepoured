@@ -1,20 +1,22 @@
 package team.cqr.cqrepoured.client.render.entity.layers;
 
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
 import team.cqr.cqrepoured.client.render.entity.RenderCQREntity;
 import team.cqr.cqrepoured.objects.entity.bases.AbstractEntityCQR;
 
-public abstract class AbstractLayerCQR implements LayerRenderer<AbstractEntityCQR> {
+public abstract class AbstractLayerCQR<T extends AbstractEntityCQR & IAnimatable> extends GeoLayerRenderer<T> {
 
 	protected final RenderCQREntity<?> entityRenderer;
 
+	//TODO: Adapt the base cqr renderer
 	public AbstractLayerCQR(RenderCQREntity<?> livingEntityRendererIn) {
 		this.entityRenderer = livingEntityRendererIn;
 	}
 
+	
 	@Override
-	public void doRenderLayer(AbstractEntityCQR entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-
+	public void render(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+		
 	}
-
 }

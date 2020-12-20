@@ -8,22 +8,31 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
+import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 import team.cqr.cqrepoured.objects.entity.bases.AbstractEntityCQRBoss;
 
-public class LayerBossDeath implements LayerRenderer<AbstractEntityCQRBoss> {
+public class LayerBossDeath<T extends AbstractEntityCQRBoss & IAnimatable> extends GeoLayerRenderer<T> implements LayerRenderer<T> {
 
 	private final int red;
 	private final int green;
 	private final int blue;
 
-	public LayerBossDeath(int red, int green, int blue) {
+	public LayerBossDeath(int red, int green, int blue, IGeoRenderer<T> entityRenderer) {
+		super(entityRenderer);
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
 	}
 
 	@Override
-	public void doRenderLayer(AbstractEntityCQRBoss entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	public boolean shouldCombineTextures() {
+		return false;
+	}
+
+	@Override
+	public void render(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (entitylivingbaseIn.deathTicks > 0) {
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -74,11 +83,6 @@ public class LayerBossDeath implements LayerRenderer<AbstractEntityCQRBoss> {
 			GlStateManager.enableAlpha();
 			RenderHelper.enableStandardItemLighting();
 		}
-	}
-
-	@Override
-	public boolean shouldCombineTextures() {
-		return false;
 	}
 
 }
